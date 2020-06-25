@@ -63,8 +63,6 @@ describe("CdbController", () =>{
         });
       });
 
-
-
       describe('GET/cdb/_id.json -  ',() =>{
         it("'Deve  um registro pelo Id", async (done) => {
 
@@ -75,10 +73,31 @@ describe("CdbController", () =>{
             
         })  
         const response = await request.get(`/cdb/${cdb._id}.json`).set('token',TOKEN);
-          expect(response.status).toBe(204)
+          expect(response.status).toBe(200)
           done();
         });
       });
-
+      describe('PUT/cdb/_id.json - Deve atualizar registro ',() =>{
+        it('Deve retornar o Statuscode 204 ', async(done) =>{
+           
+          const cdb = await Cdb.create({
+            nome: "Wesley Teste", 
+            valor_taxa: 10,
+            vencimento: '2020-12-12'
+    
+          })
+    
+          body = {
+            nome: 'Wesley Atualiza Teste', 
+            valor_taxa: 20,
+            vencimento: '2020-12-20'
+          }
+    
+          const response = await request.put(`/cdb/${cdb._id}.json`).set('token',TOKEN).send(body);
+          expect(response.status).toBe(200);
+          done();
+        });
+      });
   }); 
+  
     
