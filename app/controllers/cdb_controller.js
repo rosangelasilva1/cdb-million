@@ -55,7 +55,7 @@ const CdbController = {
           try{
             
             await Cdb.findOneAndUpdate({
-                _id: req.params.cdb_id}, {
+                _id: req.params._id}, {
                  nome: req.body.nome,
                  valor_taxa: req.body.valor_taxa,
                  vencimento: req.body.vencimento
